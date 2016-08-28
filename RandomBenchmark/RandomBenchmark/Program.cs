@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BenchmarkDotNet.Running;
+using RandomBenchmark.Benchmarks;
 
 namespace RandomBenchmark
 {
@@ -10,6 +7,14 @@ namespace RandomBenchmark
     {
         static void Main(string[] args)
         {
+            var switcher = new BenchmarkSwitcher(new[]
+            {
+                typeof(BenchmarkNext),
+                typeof(BenchmarkNextDouble),
+                typeof(BenchmarkNextBytes)
+            });
+
+            switcher.Run(args);
         }
     }
 }
