@@ -11,7 +11,8 @@ namespace RandomBenchmark
             {
                 typeof(BenchmarkNext),
                 typeof(BenchmarkNextDouble),
-                typeof(BenchmarkNextBytes)
+                typeof(BenchmarkNextBytes),
+                typeof(BenchmarkNextMinMax)
             });
 
             switcher.Run(args);
