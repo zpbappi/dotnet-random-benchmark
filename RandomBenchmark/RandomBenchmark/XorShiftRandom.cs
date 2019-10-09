@@ -55,17 +55,24 @@ namespace RandomBenchmark
             if (buffer == null)
                 throw new ArgumentNullException(nameof(buffer));
 
-            var tmp = BitConverter.GetBytes(InternalSample());
-            short index = 0;
-            for (var i = 0; i < buffer.Length; ++i)
+            int sample;
+            for (var i = 0; i < buffer.Length;)
             {
-                if (index == 4)
-                {
-                    index = 0;
-                    tmp = BitConverter.GetBytes(InternalSample());
-                }
+                sample = InternalSample();
 
-                buffer[i] = tmp[index++];
+                buffer[i++] = (byte)sample;
+
+                if (i >= buffer.Length)
+                    return;
+                buffer[i++] = (byte)(sample >> 8);
+
+                if (i >= buffer.Length)
+                    return;
+                buffer[i++] = (byte)(sample >> 16);
+
+                if (i >= buffer.Length)
+                    return;
+                buffer[i++] = (byte)(sample >> 24);
             }
         }
 
